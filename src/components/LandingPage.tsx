@@ -3,9 +3,10 @@ import { BookOpen, Rocket, Target, TrendingUp, Users, Flag, Layers } from 'lucid
 
 interface LandingPageProps {
   onLogin: () => void;
+  onNavigate: (view: 'landing' | 'privacy' | 'terms') => void;
 }
 
-export default function LandingPage({ onLogin }: LandingPageProps) {
+export default function LandingPage({ onLogin, onNavigate }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-indigo-200 selection:text-indigo-900">
       {/* Header */}
@@ -123,6 +124,11 @@ export default function LandingPage({ onLogin }: LandingPageProps) {
       {/* Footer */}
       <footer className="py-8 text-center text-slate-500 text-sm border-t border-slate-200 bg-white">
         <p>&copy; 2026 UMKM Naik Kelas. Panduan Membangun Usaha Berkelanjutan.</p>
+        <div className="mt-4 space-x-4">
+          <button onClick={() => onNavigate('privacy')} className="hover:text-indigo-600 transition-colors">Privacy Policy</button>
+          <span>&middot;</span>
+          <button onClick={() => onNavigate('terms')} className="hover:text-indigo-600 transition-colors">Terms of Service</button>
+        </div>
       </footer>
     </div>
   );

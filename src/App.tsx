@@ -50,6 +50,7 @@ const NavItem = ({ id, label, icon: Icon, isChapter = false, activeTab, setActiv
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [publicView, setPublicView] = useState<'landing' | 'privacy' | 'terms'>('landing');
   const [activeTab, setActiveTab] = useState<TabView>('persiapan-awal');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mainRef = React.useRef<HTMLElement>(null);
@@ -80,6 +81,36 @@ export default function App() {
   };
 
   if (!isLoggedIn) {
+    if (publicView === 'privacy') {
+      return (
+        <div className="bg-slate-50 min-h-screen p-4 md:p-8">
+          <div className="max-w-4xl mx-auto">
+            <button onClick={() => setPublicView('landing')} className="mb-6 text-indigo-600 font-medium hover:text-indigo-700 transition-colors flex items-center gap-2">
+              <ChevronRight className="w-4 h-4 rotate-180" /> Kembali ke Halaman Utama
+            </button>
+            <div className="bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-slate-200">
+              <PrivacyPolicy />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (publicView === 'terms') {
+      return (
+        <div className="bg-slate-50 min-h-screen p-4 md:p-8">
+          <div className="max-w-4xl mx-auto">
+            <button onClick={() => setPublicView('landing')} className="mb-6 text-indigo-600 font-medium hover:text-indigo-700 transition-colors flex items-center gap-2">
+              <ChevronRight className="w-4 h-4 rotate-180" /> Kembali ke Halaman Utama
+            </button>
+            <div className="bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-slate-200">
+              <TermsOfService />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     if (showLogin) {
       return (
         <LoginForm 
@@ -93,7 +124,7 @@ export default function App() {
       );
     }
 
-    return <LandingPage onLogin={() => setShowLogin(true)} />;
+    return <LandingPage onLogin={() => setShowLogin(true)} onNavigate={setPublicView} />;
   }
 
   return (
