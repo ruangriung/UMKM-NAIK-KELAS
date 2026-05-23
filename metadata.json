@@ -1,0 +1,8 @@
+{
+  "name": "Remix: UMKM Expert Growth Toolkit",
+  "description": "A complete guide featuring interactive modules, templates, and data-driven analysis to scale operations and ensure sustainable business success.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
